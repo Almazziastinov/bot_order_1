@@ -1,0 +1,6 @@
+aiogram
+pydantic-settings
+sqlalchemy
+alembic
+pandas
+openpyxl
