@@ -1,6 +1,6 @@
-from sqlalchemy import BigInteger, String, ForeignKey, DateTime  # Добавлен ForeignKey
+from sqlalchemy import BigInteger, String, ForeignKey, DateTime, Boolean  # Добавлен ForeignKey
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship  # Добавлен relationship
-from typing import List  # Добавлен List
+from typing import List, Optional
 from datetime import datetime
 
 
@@ -33,3 +33,15 @@ class Linktr(Base):
 
     # Связь с User (исправлено back_populates)
     user: Mapped["User"] = relationship(back_populates="linktrs")
+
+class ButtonLink(Base):
+    __tablename__ = 'button_links'
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    button_name: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)  # Например: 'support', 'contest'
+    button_text: Mapped[str] = mapped_column(String(100), nullable=False)  # Текст кнопки
+    url: Mapped[str] = mapped_column(String(500), nullable=False)  # URL ссылки
+    description: Mapped[Optional[str]] = mapped_column(String(200), nullable=True)  # Описание для админа
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True)  # Активна ли кнопка
+    updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now, onupdate=datetime.now)
+    updated_by: Mapped[Optional[int]] = mapped_column(BigInteger, nullable=True)  # ID админа, который последний раз менял
