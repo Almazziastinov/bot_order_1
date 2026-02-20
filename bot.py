@@ -27,7 +27,7 @@ class EditLinkStates(StatesGroup):
 
 
 class Settings(BaseSettings):
-    bot_token: str = "8496832802:AAF1xn0-Y9Fx5vxAfaIqNIdpaTFgkq7KbZo"  # Значение по умолчанию
+    bot_token: str   # Значение по умолчанию
     admin_ids: List[int] = [635124229, 8199226208]  # Значение по умолчанию
 
     model_config = SettingsConfigDict(
