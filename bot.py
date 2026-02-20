@@ -2,7 +2,7 @@ import asyncio
 import logging
 import os
 from typing import List
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import ConfigDict
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import CommandStart, Command
@@ -27,12 +27,13 @@ class EditLinkStates(StatesGroup):
 
 
 class Settings(BaseSettings):
-    bot_token: str
-    admin_ids: List[int]
+    bot_token: str = "8496832802:AAF1xn0-Y9Fx5vxAfaIqNIdpaTFgkq7KbZo"  # Значение по умолчанию
+    admin_ids: List[int] = [635124229, 8199226208]  # Значение по умолчанию
 
-    model_config = ConfigDict(
+    model_config = SettingsConfigDict(
         env_file=".env",
-        env_file_encoding="utf-8"
+        env_file_encoding="utf-8",
+        extra="ignore"
     )
 
 
